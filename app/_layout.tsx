@@ -1,24 +1,43 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import { useMaterial3Theme } from "@pchmn/expo-material3-theme";
+import { Stack } from "expo-router";
+import { useColorScheme } from "react-native";
+import {
+  MD3DarkTheme,
+  MD3LightTheme,
+  PaperProvider,
+  ThemeProvider,
+} from "react-native-paper";
 
-import { useColorScheme } from '@/hooks/use-color-scheme';
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
 
-export const unstable_settings = {
-  anchor: '(tabs)',
-};
+// Prevent splash screen auto-hide
+SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
+// Set the animation options. This is optional.
+SplashScreen.setOptions({
+  duration: 100,
+  fade: true,
+});
+
+export default function Main() {
   const colorScheme = useColorScheme();
+  const { theme } = useMaterial3Theme();
+
+  const paperTheme =
+    colorScheme === "dark"
+      ? { ...MD3DarkTheme, colors: theme.dark }
+      : { ...MD3LightTheme, colors: theme.light };
+
+  useEffect(() => {
+    SplashScreen.hideAsync();
+  }, []);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Modal' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <PaperProvider theme={paperTheme} settings={{ rippleEffectEnabled: false }}>
+      <ThemeProvider theme={paperTheme}>
+        <Stack />
+      </ThemeProvider>
+    </PaperProvider>
   );
 }
