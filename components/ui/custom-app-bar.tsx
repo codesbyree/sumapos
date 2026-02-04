@@ -1,16 +1,23 @@
 import { MenuIcon } from "lucide-react-native";
 import { View } from "react-native";
-import { Appbar, IconButton, Text, useTheme } from "react-native-paper";
+import { Appbar, IconButton, useTheme } from "react-native-paper";
+import ChangeStoreBottomSheet from "../change-store-bottom-sheet";
+
+import ThemedText from "./themed-text";
 
 export default function CustomAppBar() {
   const theme = useTheme();
 
   return (
     <Appbar.Header
-      style={{ backgroundColor: theme.colors.background, gap: 10 }}
+      style={{
+        backgroundColor: theme.colors.background,
+        gap: 10,
+        justifyContent: "space-between",
+      }}
     >
       <IconButton
-        size={20}
+        size={24}
         icon={(props) => (
           <MenuIcon size={props.size} color={props.color} strokeWidth={1.5} />
         )}
@@ -26,36 +33,18 @@ export default function CustomAppBar() {
           justifyContent: "center",
         }}
       >
-        <Text
+        <ThemedText
           style={{
             textAlign: "center",
-            opacity: 0.7,
-            fontFamily: "gsans",
           }}
+          priority="secondary"
           variant="bodyLarge"
         >
-          Search product
-        </Text>
+          Search products
+        </ThemedText>
       </View>
 
-      <View
-        style={{
-          width: 48,
-          height: 48,
-          alignItems: "center",
-          justifyContent: "center",
-          marginHorizontal: 8,
-        }}
-      >
-        <View
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: 1000,
-            backgroundColor: theme.colors.elevation.level2,
-          }}
-        ></View>
-      </View>
+      <ChangeStoreBottomSheet />
     </Appbar.Header>
   );
 }

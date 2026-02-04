@@ -13,13 +13,15 @@ interface Props<T> extends TextProps<T> {
   priority?: FontPriorityTypes;
 }
 
-export default function ThemedText({
-  children,
-  style,
-  variant,
-  weight = "normal",
-  priority = "high",
-}: Props<any>) {
+export default function ThemedText(props: Props<any>) {
+  const {
+    children,
+    style,
+    weight = "normal",
+    priority = "high",
+    ...rest // This contains variant, numberOfLines, etc.
+  } = props;
+
   const fontByWeights: Record<FontWeightTypes, RegisteredFontsTypes> = {
     normal: "gsans-normal",
     medium: "gsans-medium",
@@ -27,10 +29,22 @@ export default function ThemedText({
     bold: "gsans-bold",
   };
 
+  const opacityByPriority: Record<FontPriorityTypes, number> = {
+    high: 1,
+    secondary: 0.7,
+    tertiary: 0.5,
+  };
+
   return (
     <Text
-      variant={variant}
-      style={[style, { fontFamily: fontByWeights[weight] }]}
+      {...rest}
+      style={[
+        style,
+        {
+          fontFamily: fontByWeights[weight],
+          opacity: opacityByPriority[priority],
+        },
+      ]}
     >
       {children}
     </Text>
