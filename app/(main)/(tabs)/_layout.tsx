@@ -7,7 +7,7 @@ import { MAIN_TAB_BAR } from "@/contents/language-content";
 import { useAppLanguage } from "@/store/app-customizations/useAppLanguage";
 
 import CustomAppBar from "@/components/ui/custom-app-bar";
-import { CustomTabBar } from "@/components/ui/custom-tab-bar";
+import CustomTabBar from "@/components/ui/custom-tab-bar";
 
 export default function TabsLayout() {
   const theme = useTheme();

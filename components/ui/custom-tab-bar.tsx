@@ -2,7 +2,7 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { CommonActions } from "@react-navigation/native";
 import { BottomNavigation, useTheme } from "react-native-paper";
 
-export function CustomTabBar({
+export default function CustomTabBar({
   navigation,
   state,
   descriptors,
