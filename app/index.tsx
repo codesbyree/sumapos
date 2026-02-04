@@ -1,10 +1,5 @@
-import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { Redirect } from "expo-router";
 
 export default function HomeScreen() {
-  return (
-    <View>
-      <Text>Hello World!</Text>
-    </View>
-  );
+  return <Redirect href="/(main)/(tabs)/home-screen" />;
 }

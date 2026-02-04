@@ -1,10 +1,10 @@
 import { View } from "react-native";
 import { Text } from "react-native-paper";
 
-export default function HomeScreen() {
+export default function StatisticsScreen() {
   return (
     <View>
-      <Text>Lorem ipsum dolor sit amet.</Text>
+      <Text>Statistics Screen</Text>
     </View>
   );
 }
